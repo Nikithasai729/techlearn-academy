@@ -1,0 +1,327 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type StreakEntry = 
+ record {
+   avatarIndex: nat;
+   displayName: text;
+   streak: nat;
+ };
+type SessionStatus = 
+ variant {
+   active;
+   ended;
+   lobby;
+ };
+type SessionStateResponse = 
+ record {
+   answerCount: nat;
+   autoAdvance: bool;
+   currentPhase: GamePhase;
+   currentQuestion: opt HostQuestionData;
+   currentQuestionIndex: nat;
+   isLocked: bool;
+   phaseStartTime: int;
+   playerCount: nat;
+   players: vec PublicPlayerData;
+   questionCount: nat;
+   roomPin: text;
+   sessionId: nat;
+   status: SessionStatus;
+ };
+type SessionInfo = 
+ record {
+   roomPin: text;
+   sessionId: nat;
+ };
+type ReportSummary = 
+ record {
+   id: nat;
+   playedAt: int;
+   playerCount: nat;
+   questionCount: nat;
+   quizTitle: text;
+ };
+type Report = 
+ record {
+   id: nat;
+   playedAt: int;
+   playerCount: nat;
+   players: vec ArchivedPlayer;
+   questionCount: nat;
+   questions: vec ArchivedQuestion;
+   quizTitle: text;
+   summary: PostGameSummaryResponse;
+ };
+type Quiz = 
+ record {
+   createdAt: int;
+   id: nat;
+   questions: vec Question;
+   title: text;
+   updatedAt: int;
+ };
+type QuestionType = 
+ variant {
+   quiz;
+   slider;
+   trueFalse;
+   typeAnswer;
+ };
+type QuestionSummary = 
+ record {
+   answerDistribution: vec AnswerDistribution;
+   correctCount: nat;
+   correctPercent: nat;
+   options: vec text;
+   questionIndex: nat;
+   questionText: text;
+   questionType: QuestionType;
+   totalAnswers: nat;
+ };
+type QuestionResultsResponse = 
+ record {
+   answerDistribution: vec AnswerDistribution;
+   correctCount: nat;
+   options: vec text;
+   questionIndex: nat;
+   questionText: text;
+   questionType: QuestionType;
+   totalAnswers: nat;
+ };
+type Question = 
+ record {
+   acceptedAnswers: vec text;
+   correctOptionIndices: vec nat;
+   image: opt ExternalBlob;
+   imagePlacement: ImagePlacement;
+   isMultiSelect: bool;
+   options: vec text;
+   pointMode: PointMode;
+   questionType: QuestionType;
+   showQuestionToPlayers: bool;
+   sliderCorrect: nat;
+   sliderMax: nat;
+   sliderMin: nat;
+   "text": text;
+   theme: text;
+   timeLimit: nat;
+ };
+type PublicPlayerData = 
+ record {
+   avatarIndex: nat;
+   displayName: text;
+   playerId: nat;
+   score: nat;
+ };
+type Profile = record {name: text;};
+type PostGameSummaryResponse = 
+ record {
+   questionSummaries: vec QuestionSummary;
+   totalPlayers: nat;
+   totalQuestions: nat;
+ };
+type PointMode = 
+ variant {
+   double;
+   none;
+   standard;
+ };
+type PlayerStateResponse = 
+ record {
+   currentPhase: GamePhase;
+   currentQuestion: opt PlayerQuestionData;
+   currentQuestionIndex: nat;
+   currentStreak: nat;
+   hasAnsweredCurrent: bool;
+   isLocked: bool;
+   lastAnswerCorrect: opt bool;
+   lastHostHeartbeat: int;
+   lastPointsEarned: nat;
+   ownAvatarIndex: nat;
+   ownDisplayName: text;
+   ownScore: nat;
+   phaseStartTime: int;
+   playerCount: nat;
+   players: vec PublicPlayerData;
+   status: SessionStatus;
+ };
+type PlayerQuestionData = 
+ record {
+   image: opt ExternalBlob;
+   imagePlacement: ImagePlacement;
+   options: vec text;
+   questionType: QuestionType;
+   showQuestionToPlayers: bool;
+   sliderMax: nat;
+   sliderMin: nat;
+   "text": text;
+   theme: text;
+   timeLimit: nat;
+ };
+type LeaderboardResponse = 
+ record {
+   entries: vec LeaderboardEntry;
+   totalPlayers: nat;
+ };
+type LeaderboardEntry = 
+ record {
+   avatarIndex: nat;
+   currentStreak: nat;
+   displayName: text;
+   playerId: nat;
+   rank: nat;
+   score: nat;
+ };
+type JoinResult = 
+ record {
+   avatarIndex: nat;
+   playerId: nat;
+   playerToken: nat;
+   sessionId: nat;
+ };
+type ImagePlacement = 
+ variant {
+   background;
+   centered;
+ };
+type HostQuestionData = 
+ record {
+   acceptedAnswers: vec text;
+   correctOptionIndices: vec nat;
+   image: opt ExternalBlob;
+   imagePlacement: ImagePlacement;
+   options: vec text;
+   pointMode: PointMode;
+   questionType: QuestionType;
+   showQuestionToPlayers: bool;
+   sliderCorrect: nat;
+   sliderMax: nat;
+   sliderMin: nat;
+   "text": text;
+   theme: text;
+   timeLimit: nat;
+ };
+type GamePhase = 
+ variant {
+   answering;
+   ended;
+   lobby;
+   podium;
+   questionDisplay;
+   results;
+   scoreboard;
+ };
+type ExternalBlob = blob;
+type ContactMessage = 
+ record {
+   email: text;
+   id: nat;
+   message: text;
+   name: text;
+   timestamp: nat64;
+ };
+type ArchivedQuestion = 
+ record {
+   acceptedAnswers: vec text;
+   correctOptionIndices: vec nat;
+   options: vec text;
+   questionType: QuestionType;
+   sliderCorrect: nat;
+   sliderMax: nat;
+   sliderMin: nat;
+   "text": text;
+ };
+type ArchivedPlayerAnswer = 
+ record {
+   isCorrect: bool;
+   pointsEarned: nat;
+   questionIndex: nat;
+   selectedOptions: vec nat;
+   sliderValue: nat;
+   textAnswer: text;
+ };
+type ArchivedPlayer = 
+ record {
+   answers: vec ArchivedPlayerAnswer;
+   avatarIndex: nat;
+   displayName: text;
+   rank: nat;
+   score: nat;
+ };
+type AnswerSubmission = 
+ variant {
+   options: vec nat;
+   slider: nat;
+   "text": text;
+ };
+type AnswerDistribution = 
+ record {
+   count: nat;
+   isCorrect: bool;
+   optionIndex: nat;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  advancePhase: (sessionId: nat) -> ();
+  checkRoomPin: (roomPin: text) -> (bool) query;
+  createQuiz: (title: text, questions: vec Question) -> (nat);
+  createSession: (quizId: nat) -> (SessionInfo);
+  deleteQuiz: (quizId: nat) -> ();
+  deleteReport: (reportId: nat) -> ();
+  endSession: (sessionId: nat) -> ();
+  getContacts: () -> (vec ContactMessage) query;
+  getLeaderboard: (sessionId: nat) -> (LeaderboardResponse) query;
+  getPlayerLeaderboard: (roomPin: text, playerToken: nat) ->
+   (LeaderboardResponse) query;
+  getPlayerQuestionResults: (roomPin: text, playerToken: nat, questionIndex:
+   nat) -> (QuestionResultsResponse) query;
+  getPlayerState: (roomPin: text, playerToken: nat) ->
+   (PlayerStateResponse) query;
+  getPlayerStreaks: (roomPin: text, playerToken: nat) ->
+   (vec StreakEntry) query;
+  getPostGameSummary: (sessionId: nat) -> (PostGameSummaryResponse) query;
+  getProfile: () -> (opt Profile) query;
+  getQuestionResults: (sessionId: nat, questionIndex: nat) ->
+   (QuestionResultsResponse) query;
+  getQuiz: (quizId: nat) -> (opt Quiz) query;
+  getQuizzes: () -> (vec Quiz) query;
+  getReport: (reportId: nat) -> (opt Report) query;
+  getReports: () -> (vec ReportSummary) query;
+  getSessionState: (sessionId: nat) -> (SessionStateResponse) query;
+  getStreaks: (sessionId: nat) -> (vec StreakEntry) query;
+  hostHeartbeat: (sessionId: nat) -> ();
+  joinSession: (roomPin: text, displayName: text) -> (JoinResult);
+  lockSession: (sessionId: nat, locked: bool) -> ();
+  removePlayer: (sessionId: nat, playerId: nat) -> ();
+  setAutoAdvance: (sessionId: nat, enabled: bool) -> ();
+  setProfile: (name: text) -> ();
+  startGame: (sessionId: nat) -> ();
+  submitAnswer: (roomPin: text, playerToken: nat, answer:
+   AnswerSubmission) -> ();
+  submitContact: (name: text, email: text, message: text) ->
+   (variant {
+      err: text;
+      ok: nat;
+    });
+  updatePlayerName: (roomPin: text, playerToken: nat, newName: text) -> ();
+  updateQuiz: (quizId: nat, title: text, questions: vec Question) -> ();
+}

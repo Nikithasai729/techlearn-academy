@@ -1,0 +1,21 @@
+{
+  "overview": "TechLearn Academy — a dark-themed tech education website with 10 expandable course categories, each showing sub-courses inline via accordion layout.",
+  "features": [
+    "Accordion course catalog with 10 categories (Full Stack, AI/ML, Frontend, Backend, DevOps, etc.)",
+    "5-8 sub-courses per category with difficulty badges and duration",
+    "Homepage hero, stats bar, featured courses, learning path, and testimonials",
+    "Contact form with backend submission storage",
+    "Sticky navigation, mobile-responsive hamburger menu",
+    "Dark navy and electric blue design with full accessibility"
+  ],
+  "category": "education",
+  "tags": [
+    "education",
+    "tech",
+    "courses",
+    "learning",
+    "accordion",
+    "dark-theme"
+  ],
+  "last_updated": "2026-06-01T16:31:54.533Z"
+}

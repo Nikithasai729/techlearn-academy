@@ -1,0 +1,136 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
+  --primary: #0ea5e9;
+  --primary-foreground: #0f172a;
+  --secondary: #06b6d4;
+  --secondary-foreground: #0f172a;
+  --muted: #334155;
+  --muted-foreground: #cbd5e1;
+  --accent: #0ea5e9;
+  --accent-foreground: #0f172a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: #0ea5e9;
+  --chart-1: #0ea5e9;
+  --chart-2: #06b6d4;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #0ea5e9;
+  --sidebar-primary-foreground: #0f172a;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: #334155;
+  --sidebar-ring: #0ea5e9;
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-serif: Inter, serif;
+  --font-mono: Inter, monospace;
+  --radius: 0.5rem;
+  --shadow-x: 0px;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.1;
+  --shadow-color: #000000;
+  --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0px 1px 3px 0px hsl(0 0% 0% / 0.1);
+  --shadow: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px 0px
+    hsl(0 0% 0% / 0.06);
+  --shadow-md: 0px 4px 6px 0px hsl(0 0% 0% / 0.1), 0px 2px 4px 0px
+    hsl(0 0% 0% / 0.06);
+  --shadow-lg: 0px 10px 15px 0px hsl(0 0% 0% / 0.1), 0px 4px 6px 0px
+    hsl(0 0% 0% / 0.05);
+  --shadow-xl: 0px 20px 25px 0px hsl(0 0% 0% / 0.1), 0px 8px 10px 0px
+    hsl(0 0% 0% / 0.04);
+  --shadow-2xl: 0px 25px 50px 0px hsl(0 0% 0% / 0.25);
+  --tracking-normal: 0.02em;
+  --spacing: 0.25rem;
+  --landing: #0f172a;
+  --landing-dot: rgba(14, 165, 233, 0.1);
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
+  --primary: #0ea5e9;
+  --primary-foreground: #0f172a;
+  --secondary: #06b6d4;
+  --secondary-foreground: #0f172a;
+  --muted: #334155;
+  --muted-foreground: #cbd5e1;
+  --accent: #0ea5e9;
+  --accent-foreground: #0f172a;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: #0ea5e9;
+  --chart-1: #0ea5e9;
+  --chart-2: #06b6d4;
+  --chart-3: #10b981;
+  --chart-4: #f59e0b;
+  --chart-5: #ef4444;
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #0ea5e9;
+  --sidebar-primary-foreground: #0f172a;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: #334155;
+  --sidebar-ring: #0ea5e9;
+  --font-sans: Inter, system-ui, sans-serif;
+  --font-serif: Inter, serif;
+  --font-mono: Inter, monospace;
+  --radius: 0.5rem;
+  --shadow-x: 0px;
+  --shadow-y: 1px;
+  --shadow-blur: 3px;
+  --shadow-spread: 0px;
+  --shadow-opacity: 0.1;
+  --shadow-color: #000000;
+  --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0px 1px 3px 0px hsl(0 0% 0% / 0.1);
+  --shadow: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px 0px
+    hsl(0 0% 0% / 0.06);
+  --shadow-md: 0px 4px 6px 0px hsl(0 0% 0% / 0.1), 0px 2px 4px 0px
+    hsl(0 0% 0% / 0.06);
+  --shadow-lg: 0px 10px 15px 0px hsl(0 0% 0% / 0.1), 0px 4px 6px 0px
+    hsl(0 0% 0% / 0.05);
+  --shadow-xl: 0px 20px 25px 0px hsl(0 0% 0% / 0.1), 0px 8px 10px 0px
+    hsl(0 0% 0% / 0.04);
+  --shadow-2xl: 0px 25px 50px 0px hsl(0 0% 0% / 0.25);
+  --landing: #0f172a;
+  --landing-dot: rgba(14, 165, 233, 0.1);
+
+  --tracking-normal: 0.02em;
+  --spacing: 0.25rem;
+}
+
+body {
+  letter-spacing: var(--tracking-normal);
+}

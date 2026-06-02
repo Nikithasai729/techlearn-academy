@@ -1,0 +1,199 @@
+// Version: 1.0.0
+type AnswerDistribution__23687422 =
+  {count : Nat; isCorrect : Bool; optionIndex : Nat};
+type ArchivedPlayerAnswer__955062254 =
+  {
+    isCorrect : Bool;
+    pointsEarned : Nat;
+    questionIndex : Nat;
+    selectedOptions : [Nat];
+    sliderValue : Nat;
+    textAnswer : Text
+  };
+type ArchivedPlayer__385560850 =
+  {
+    answers : [ArchivedPlayerAnswer__955062254];
+    avatarIndex : Nat;
+    displayName : Text;
+    rank : Nat;
+    score : Nat
+  };
+type ArchivedQuestion__74467647 =
+  {
+    acceptedAnswers : [Text];
+    correctOptionIndices : [Nat];
+    options : [Text];
+    questionType : QuestionType__433468977;
+    sliderCorrect : Nat;
+    sliderMax : Nat;
+    sliderMin : Nat;
+    text : Text
+  };
+type ContactMessage__84138439 =
+  {email : Text; id : Nat; message : Text; name : Text; timestamp : Nat64};
+type Data__80296667<K, V> =
+  {var count : Nat__1040412405; kvs : [var ?(K, V)]};
+type ExternalBlob__365673026 = Blob;
+type GamePhase__800432995 =
+  {
+    #answering;
+    #ended;
+    #lobby;
+    #podium;
+    #questionDisplay;
+    #results;
+    #scoreboard
+  };
+type ImagePlacement__746062235 = {#background; #centered};
+type Internal__41346355<K, V> =
+  {children : [var ?Node__1000929467<K, V>]; data : Data__80296667<K, V>};
+type Leaf__712614010<K, V> = {data : Data__80296667<K, V>};
+type Map__222667396<K, V> = Map__912772452<K, V>;
+type Map__709709801<K, V> =
+  {var root : Node__1000929467<K, V>; var size : Nat__1040412405};
+type Map__912772452<K, V> = Map__709709801<K, V>;
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__1000929467<K, V> =
+  {#internal : Internal__41346355<K, V>; #leaf : Leaf__712614010<K, V>};
+type PlayerAnswer__47257052 =
+  {
+    isCorrect : Bool;
+    pointsEarned : Nat;
+    selectedOptions : [Nat];
+    sliderValue : Nat;
+    submittedAt : Int;
+    textAnswer : Text
+  };
+type PlayerData__163937795 =
+  {
+    answers : Map__222667396<Nat, PlayerAnswer__47257052>;
+    avatarIndex : Nat;
+    currentStreak : Nat;
+    displayName : Text;
+    joinedAt : Int;
+    playerId : Nat;
+    score : Nat;
+    token : Nat
+  };
+type PointMode__653994655 = {#double; #none; #standard};
+type PostGameSummaryResponse__179252385 =
+  {
+    questionSummaries : [QuestionSummary__862808339];
+    totalPlayers : Nat;
+    totalQuestions : Nat
+  };
+type Profile__340690988 = {name : Text};
+type QuestionSummary__862808339 =
+  {
+    answerDistribution : [AnswerDistribution__23687422];
+    correctCount : Nat;
+    correctPercent : Nat;
+    options : [Text];
+    questionIndex : Nat;
+    questionText : Text;
+    questionType : QuestionType__433468977;
+    totalAnswers : Nat
+  };
+type QuestionType__433468977 = {#quiz; #slider; #trueFalse; #typeAnswer};
+type Question__879138514 =
+  {
+    acceptedAnswers : [Text];
+    correctOptionIndices : [Nat];
+    image : ?ExternalBlob__365673026;
+    imagePlacement : ImagePlacement__746062235;
+    isMultiSelect : Bool;
+    options : [Text];
+    pointMode : PointMode__653994655;
+    questionType : QuestionType__433468977;
+    showQuestionToPlayers : Bool;
+    sliderCorrect : Nat;
+    sliderMax : Nat;
+    sliderMin : Nat;
+    text : Text;
+    theme : Text;
+    timeLimit : Nat
+  };
+type Quiz__699127777 =
+  {
+    createdAt : Int;
+    id : Nat;
+    questions : [Question__879138514];
+    title : Text;
+    updatedAt : Int
+  };
+type Report__89520890 =
+  {
+    id : Nat;
+    playedAt : Int;
+    playerCount : Nat;
+    players : [ArchivedPlayer__385560850];
+    questionCount : Nat;
+    questions : [ArchivedQuestion__74467647];
+    quizTitle : Text;
+    summary : PostGameSummaryResponse__179252385
+  };
+type SessionStatus__380911859 = {#active; #ended; #lobby};
+type Session__107932720 =
+  {
+    autoAdvance : Bool;
+    currentPhase : GamePhase__800432995;
+    currentQuestionIndex : Nat;
+    hostPrincipal : Principal;
+    id : Nat;
+    isLocked : Bool;
+    lastHostHeartbeat : Int;
+    nextPlayerId : Nat;
+    phaseStartTime : Int;
+    players : Map__222667396<Nat, PlayerData__163937795>;
+    questions : [Question__879138514];
+    quizId : Nat;
+    roomPin : Text;
+    status : SessionStatus__380911859
+  };
+actor {
+  stable JOIN_COOLDOWN_NS : Int;
+  stable MAX_ACCEPTED_ANSWERS : Nat;
+  stable MAX_OPTION_TEXT_LENGTH : Nat;
+  stable MAX_QUESTIONS_PER_QUIZ : Nat;
+  stable MAX_QUESTION_TEXT_LENGTH : Nat;
+  stable MAX_QUIZZES_PER_USER : Nat;
+  stable MAX_REPORTS_PER_USER : Nat;
+  stable SESSION_RETENTION_NS : Int;
+  stable contactMessages :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?ContactMessage__84138439]];
+      var elementIndex : Nat__1040412405
+    };
+  stable contactState : {var nextContactId : Nat};
+  stable mgmt : actor {raw_rand : shared () -> async Blob};
+  stable var nextQuizId : Nat;
+  stable var nextReportId : Nat;
+  stable var nextSessionId : Nat;
+  stable var randomSeed : Nat;
+  stable var roomPinIndex :
+    {var root : Node__1000929467<Text, Nat>; var size : Nat__1040412405};
+  stable var sessions :
+    {
+      var root : Node__1000929467<Nat, Session__107932720>;
+      var size : Nat__1040412405
+    };
+  stable var userProfiles :
+    {
+      var root : Node__1000929467<Principal, Profile__340690988>;
+      var size : Nat__1040412405
+    };
+  stable var userQuizzes :
+    {
+      var root :
+        Node__1000929467<Principal, Map__222667396<Nat, Quiz__699127777>>;
+      var size : Nat__1040412405
+    };
+  stable var userReports :
+    {
+      var root :
+        Node__1000929467<Principal, Map__222667396<Nat, Report__89520890>>;
+      var size : Nat__1040412405
+    }
+};
